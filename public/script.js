@@ -18,3 +18,12 @@ function setLoading(isLoading) {
   inputEl.disabled = isLoading;
   if (!isLoading) inputEl.focus();
 }
+
+async function sendMessage() {
+  const text = inputEl.value.trim();
+  if (!text) return;
+
+  addMessage(text, "user");
+  history.push({ role: "user", content: text });
+  inputEl.value = "";
+  setLoading(true);
