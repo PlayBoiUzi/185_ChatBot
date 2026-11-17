@@ -52,3 +52,8 @@ async function sendMessage() {
     setLoading(false);
   }
 }
+
+sendBtn.addEventListener("click", sendMessage);
+inputEl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") sendMessage();
+});
