@@ -51,3 +51,21 @@ app.post("/api/chat", async (req, res) => {
         max_tokens: 2048,
       }),
     });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      const detail = data?.error?.message || `Status ${response.status}`;
+      return res.status(502).json({ error: `Gagal menghubungi model: ${detail}` });
+    }
+
+    const reply = data?.choices?.[0]?.message?.content?.trim();
+    if (!reply) {
+      return res.status(502).json({ error: "Model tidak mengembalikan jawaban. Coba kirim ulang." });
+    }
+    res.json({ reply });
+  } catch (err) {
+    console.error("Chat error:", err);
+    res.status(500).json({ error: "Terjadi kesalahan pada server." });
+  }
+});
