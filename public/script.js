@@ -3,3 +3,12 @@ const inputEl = document.getElementById("input");
 const sendBtn = document.getElementById("send");
 
 const history = [];
+
+function addMessage(text, type) {
+  const div = document.createElement("div");
+  div.className = `msg msg--${type}`;
+  div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return div;
+}
