@@ -27,3 +27,28 @@ async function sendMessage() {
   history.push({ role: "user", content: text });
   inputEl.value = "";
   setLoading(true);
+
+  const typing = addMessage("Sedang mengetik...", "bot");
+  typing.classList.add("msg--typing");
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history }),
+    });
+    const data = await res.json();
+    typing.remove();
+
+    if (!res.ok) throw new Error(data.error || "Terjadi kesalahan.");
+
+    addMessage(data.reply, "bot");
+    history.push({ role: "assistant", content: data.reply });
+  } catch (err) {
+    typing.remove();
+    history.pop();
+    addMessage(err.message, "error");
+  } finally {
+    setLoading(false);
+  }
+}
