@@ -69,3 +69,10 @@ app.post("/api/chat", async (req, res) => {
     res.status(500).json({ error: "Terjadi kesalahan pada server." });
   }
 });
+
+const PORT = process.env.PORT || 3000;
+if (require.main === module) {
+  app.listen(PORT, () => console.log(`Server berjalan di http://localhost:${PORT}`));
+}
+
+module.exports = app;
