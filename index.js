@@ -35,3 +35,19 @@ app.post("/api/chat", async (req, res) => {
   const history = messages
     .filter((m) => m && ["user", "assistant"].includes(m.role) && typeof m.content === "string")
     .slice(-20);
+
+  try {
+    const response = await fetch(OPENROUTER_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "HTTP-Referer": process.env.SITE_URL || "http://localhost:3000",
+        "X-Title": process.env.SITE_NAME || "3NIMBelakang ChatBot",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history],
+        max_tokens: 2048,
+      }),
+    });
