@@ -33,3 +33,15 @@ body {
 .msg--user { background: var(--ink); color: #fff; align-self: flex-end; }
 .msg--error { background: #fde8e8; color: #9b1c1c; align-self: flex-start; }
 .msg--typing { color: #6b7075; font-style: italic; }
+.chat__input { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+.chat__input input {
+  flex: 1; padding: 10px 12px; border: 1px solid var(--line);
+  border-radius: 8px; font: inherit; font-size: .9rem;
+}
+.chat__input input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.chat__input button {
+  padding: 0 18px; border: 0; border-radius: 8px;
+  background: var(--ink); color: #fff; font: inherit; font-size: .85rem; cursor: pointer;
+}
+.chat__input button:disabled { opacity: .5; cursor: not-allowed; }
+@media (max-width: 480px) { .chat { border-radius: 0; height: 100dvh; } }
