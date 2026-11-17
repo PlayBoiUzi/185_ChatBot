@@ -18,3 +18,6 @@ body {
   border-radius: 14px; overflow: hidden;
   box-shadow: 0 8px 28px rgba(0, 0, 0, .12);
 }
+.chat__header { background: var(--ink); color: #fff; padding: 14px 16px; text-align: center; }
+.chat__header h1 { margin: 0; font-size: 1.15rem; }
+.chat__header p { margin: 2px 0 0; font-size: .72rem; opacity: .75; }
