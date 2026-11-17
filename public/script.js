@@ -12,3 +12,9 @@ function addMessage(text, type) {
   messagesEl.scrollTop = messagesEl.scrollHeight;
   return div;
 }
+
+function setLoading(isLoading) {
+  sendBtn.disabled = isLoading;
+  inputEl.disabled = isLoading;
+  if (!isLoading) inputEl.focus();
+}
